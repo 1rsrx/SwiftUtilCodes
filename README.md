@@ -53,3 +53,31 @@ private func toSettingApp() {
     UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
 }
 ```
+
+## 通知許可
+```Swift
+// 通知設定を取得
+private func checkNotificationSettings() {
+    //通知の設定を取得
+    UNUserNotificationCenter.current().getNotificationSettings { setting in
+        if setting.authorizationStatus == .authorized {
+            print("許可")
+        } else {
+            print("未許可")
+        }
+    }
+}
+
+//通知設定用のアラートを表示(１度しか表示されない)
+private func showNotificationSettingAlert() {
+    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+    UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { authorized, error in
+        if let error = error {
+            print(error)
+            return
+        }
+        
+        print("許可")
+    }
+}
+```
