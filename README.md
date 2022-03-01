@@ -3,6 +3,9 @@ Swiftでよく使う便利コード集
 
 ## IDFAのステータス取得 => アラート表示
 ``` Swift
+import AdSupport
+import AppTrackingTransparency
+
 // ステータス取得
 if #available(iOS 14, *) {
     switch ATTrackingManager.trackingAuthorizationStatus {
